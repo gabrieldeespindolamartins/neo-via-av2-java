@@ -1,0 +1,23 @@
+# Arquivos que o Git deve IGNORAR (não vão para o GitHub)
+
+# Resultado da compilação (é gerado de novo a cada build)
+target/
+build/
+dist/
+out/
+*.class
+*.jar
+
+# Configurações pessoais do NetBeans (caminhos do seu computador)
+nbproject/private/
+
+# Outras IDEs (caso alguém use)
+.idea/
+*.iml
+.vscode/
+
+# Lixo do sistema operacional e logs
+Thumbs.db
+desktop.ini
+.DS_Store
+*.log

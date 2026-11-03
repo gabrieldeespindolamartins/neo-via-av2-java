@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  pom.xml = "receita" do projeto para o Maven.
+  O NetBeans lê este arquivo para saber:
+    - qual versão do Java usar;
+    - quais bibliotecas baixar (dependências);
+    - qual classe executar quando você clica em Run.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.edu.fmpsc</groupId>
+    <artifactId>neovia</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>NeoVia</name>
+    <description>App do passageiro de transporte público (Av2 de Java - POO)</description>
+
+    <properties>
+        <!-- Acentos do português funcionando em qualquer computador -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Versão mínima do Java. Funciona com JDK 17, 21 ou mais novo. -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- Classe que o NetBeans executa ao clicar em Run (F6) -->
+        <exec.mainClass>br.edu.fmpsc.neovia.Main</exec.mainClass>
+    </properties>
+
+    <dependencies>
+        <!-- Driver JDBC do MySQL: permite o Java conversar com o banco.
+             É a única biblioteca externa do projeto (Swing já vem no Java). -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.7.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

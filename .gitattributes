@@ -1,0 +1,6 @@
+# Padroniza as quebras de linha entre os computadores da equipe,
+# evitando que o Git mostre o arquivo inteiro como "alterado" sem motivo.
+* text=auto
+
+# Formulários do NetBeans são XML: tratar como texto
+*.form text
