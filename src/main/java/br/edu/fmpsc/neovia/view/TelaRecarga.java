@@ -8,7 +8,7 @@ import javax.swing.SwingConstants;
 
 /**
  * TELA PROVISÓRIA (placeholder) - Recarga do cartão de transporte.
- * Responsável: Isabela (fase 2, de 13 a 19/11).
+ * Responsável: Isabela (fase 2, de 16 a 19/11).
  *
  * Isabela: pode substituir este arquivo inteiro.
  * Se for usar o editor visual do NetBeans, apague este arquivo e crie um

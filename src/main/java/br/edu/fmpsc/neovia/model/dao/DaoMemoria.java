@@ -1,4 +1,4 @@
-package br.edu.fmpsc.neovia.dao;
+package br.edu.fmpsc.neovia.model.dao;
 
 import br.edu.fmpsc.neovia.model.EntidadeBase;
 import java.util.ArrayList;
@@ -11,17 +11,17 @@ import java.util.List;
  * - Permite testar as telas ANTES de o banco de dados estar pronto.
  * - Os dados somem quando o programa fecha. Isso é esperado: é só para teste.
  *
- * Como usar (exemplo com a classe Rota):
- *     Dao<Rota> dao = new DaoMemoria<>();
- *     dao.salvar(novaRota);
+ * Como usar (exemplo com a classe CartaoTransporte):
+ *     Dao<CartaoTransporte> dao = new DaoMemoria<>();
+ *     dao.salvar(novoCartao);
  *
  * Depois, quando o banco estiver pronto, basta trocar UMA linha:
- *     Dao<Rota> dao = new RotaDaoBanco();   // nova classe que implementa Dao<Rota>
+ *     Dao<CartaoTransporte> dao = new CartaoDao();   // nova classe que implementa Dao<CartaoTransporte>
  * O resto do código continua igual. Isso é POLIMORFISMO: a variável é do tipo
  * da interface (Dao), e o objeto real pode ser qualquer classe que a implemente.
  *
- * Por ser genérica (<T>), esta MESMA classe serve para Usuario, Rota,
- * CartaoTransporte... Ninguém precisa reescrevê-la.
+ * Por ser genérica (<T>), esta MESMA classe serve para Usuario,
+ * CartaoTransporte, Recarga... Ninguém precisa reescrevê-la.
  */
 public class DaoMemoria<T extends EntidadeBase> implements Dao<T> {
 

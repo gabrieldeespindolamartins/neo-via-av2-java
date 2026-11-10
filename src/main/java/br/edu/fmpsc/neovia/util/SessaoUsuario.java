@@ -8,11 +8,13 @@ import br.edu.fmpsc.neovia.model.Usuario;
  * Qualquer tela pode perguntar "quem é o usuário atual?":
  *     Usuario usuario = SessaoUsuario.getUsuarioLogado();
  *
- * FASE 1: a tela de login ainda não existe. Por isso, se ninguém fez login,
- * esta classe devolve um "Usuário de Teste" fixo (id 1), o mesmo que está
- * no arquivo database/dados.sql. Assim as telas de Rotas e Cartões já funcionam.
+ * USUÁRIO DE TESTE: se ninguém fez login, esta classe devolve um "Usuário de Teste"
+ * fixo (id 1), o mesmo que está no arquivo database/dados.sql. Assim as telas de
+ * Cartões e Recarga já funcionam. Esse Usuário de Teste automático continua só até
+ * o login do Gustavo funcionar e será REMOVIDO em 19/11
+ * (depois disso, sem login, getUsuarioLogado() devolverá null).
  *
- * FASE 2: a TelaLogin, depois de conferir e-mail e senha, chama
+ * LOGIN DE VERDADE: a TelaLogin, depois de conferir e-mail e senha, chama
  *     SessaoUsuario.setUsuarioLogado(usuarioQueFezLogin);
  * e a partir daí as telas passam a receber o usuário real.
  *
@@ -34,7 +36,7 @@ public final class SessaoUsuario {
         return usuarioLogado;
     }
 
-    /** Chamado pela TelaLogin (fase 2) quando o login dá certo. */
+    /** Chamado pela TelaLogin quando o login dá certo. */
     public static void setUsuarioLogado(Usuario usuario) {
         usuarioLogado = usuario;
     }
@@ -44,7 +46,7 @@ public final class SessaoUsuario {
         usuarioLogado = null;
     }
 
-    /** Mesmo usuário do database/dados.sql. Provisório até a fase 2. */
+    /** Mesmo usuário do database/dados.sql. Provisório: some em 19/11. */
     private static Usuario criarUsuarioDeTeste() {
         Usuario teste = new Usuario("Usuário de Teste", "00000000000",
                 "teste@neovia.com", "hash-provisorio");

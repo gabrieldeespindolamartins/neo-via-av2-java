@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
  * para que ninguém precise editá-la de novo: ela só abre as telas de cada módulo.
  *
  * NÃO EDITE ESTA CLASSE sem falar com o Gabriel.
- * Cada colega trabalha só na própria tela (TelaRotas, TelaCartoes, TelaLogin, TelaRecarga).
+ * Cada colega trabalha só na própria tela (TelaUsuarios, TelaCartoes, TelaRecarga).
  */
 public class TelaPrincipal extends JFrame {
 
@@ -42,18 +42,25 @@ public class TelaPrincipal extends JFrame {
 
         // GridLayout(linhas, colunas, espaço horizontal, espaço vertical): botões do mesmo tamanho.
         JPanel botoes = new JPanel(new GridLayout(4, 1, 0, 10));
-        botoes.add(criarBotao("Rotas", () -> new TelaRotas().setVisible(true)));
+        botoes.add(criarBotao("Usuários", () -> new TelaUsuarios().setVisible(true)));
         botoes.add(criarBotao("Meus cartões", () -> new TelaCartoes().setVisible(true)));
         botoes.add(criarBotao("Recarga", () -> new TelaRecarga().setVisible(true)));
-        botoes.add(criarBotao("Entrar / Cadastrar", () -> new TelaLogin().setVisible(true)));
+        botoes.add(criarBotao("Sair", this::sair));
         painel.add(botoes, BorderLayout.CENTER);
 
-        // Rodapé mostra quem está logado (na fase 1, o Usuário de Teste).
+        // Rodapé mostra quem está logado (por enquanto, o Usuário de Teste).
         JLabel rodape = new JLabel("Usuário: " + SessaoUsuario.getUsuarioLogado().getNome(),
                 SwingConstants.CENTER);
         painel.add(rodape, BorderLayout.SOUTH);
 
         setContentPane(painel);
+    }
+
+    /** Faz logout, fecha o menu e volta para a tela de login. */
+    private void sair() {
+        SessaoUsuario.encerrar();
+        dispose();
+        new TelaLogin().setVisible(true);
     }
 
     /**

@@ -1,7 +1,7 @@
 package br.edu.fmpsc.neovia.model;
 
 /**
- * Classe-mãe de TODAS as entidades do sistema (Usuario, Rota, CartaoTransporte...).
+ * Classe-mãe de TODAS as entidades do sistema (Usuario, CartaoTransporte, Recarga...).
  *
  * Por que ela existe?
  * - Toda entidade salva no banco precisa de um identificador (id).

@@ -1,14 +1,14 @@
 package br.edu.fmpsc.neovia;
 
-import br.edu.fmpsc.neovia.view.TelaPrincipal;
+import br.edu.fmpsc.neovia.view.TelaLogin;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 /**
  * Ponto de partida do sistema NeoVia.
  *
- * A única tarefa desta classe é abrir a tela principal.
- * Toda a lógica fica nas camadas model, view, controller e dao.
+ * A única tarefa desta classe é abrir a tela de login (primeira tela do sistema).
+ * Toda a lógica fica nas camadas model (com model.dao), view e controller.
  */
 public class Main {
 
@@ -23,6 +23,6 @@ public class Main {
 
         // Regra do Swing: telas devem ser criadas na "thread de eventos" (EDT).
         // O invokeLater garante isso.
-        SwingUtilities.invokeLater(() -> new TelaPrincipal().setVisible(true));
+        SwingUtilities.invokeLater(() -> new TelaLogin().setVisible(true));
     }
 }

@@ -5,8 +5,8 @@
 -- e clique no raio (Execute). Depois execute o dados.sql.
 --
 -- Por enquanto só existe a tabela usuario.
--- As demais tabelas (rota, trecho, cartao_transporte, recarga...) virão
--- do DER (Diagrama Entidade-Relacionamento) que a equipe está fazendo.
+-- As tabelas cartao_transporte, recarga e forma_pagamento entram após a
+-- revisão do DER (11/11).
 -- =====================================================================
 
 -- utf8mb4 = aceita qualquer caractere (acentos, emojis...)

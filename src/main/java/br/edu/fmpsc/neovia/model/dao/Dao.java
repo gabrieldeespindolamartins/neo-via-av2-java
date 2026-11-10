@@ -1,4 +1,4 @@
-package br.edu.fmpsc.neovia.dao;
+package br.edu.fmpsc.neovia.model.dao;
 
 import br.edu.fmpsc.neovia.model.EntidadeBase;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * salvar(), listarTodos() etc., sem saber como isso é feito por dentro.
  *
  * O <T extends EntidadeBase> é um "tipo genérico":
- * - T é um espaço reservado para a classe que o DAO vai guardar (Usuario, Rota...).
+ * - T é um espaço reservado para a classe que o DAO vai guardar (Usuario, CartaoTransporte...).
  * - "extends EntidadeBase" garante que T sempre tem id.
  * Exemplo: Dao<Usuario> é um DAO que só aceita e devolve objetos Usuario.
  *

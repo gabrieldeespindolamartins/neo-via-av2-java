@@ -1,4 +1,4 @@
-package br.edu.fmpsc.neovia.dao;
+package br.edu.fmpsc.neovia.model.dao;
 
 import br.edu.fmpsc.neovia.model.Usuario;
 import java.util.List;

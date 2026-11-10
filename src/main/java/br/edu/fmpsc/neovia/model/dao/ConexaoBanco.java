@@ -1,4 +1,4 @@
-package br.edu.fmpsc.neovia.dao;
+package br.edu.fmpsc.neovia.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,13 +9,11 @@ import java.sql.SQLException;
  *
  * Por que isolar aqui?
  * - Se o endereço, o usuário ou a senha do banco mudarem, muda-se só este arquivo.
- * - Os DAOs com banco (ex.: RotaDaoBanco) pedem a conexão para esta classe,
+ * - Os DAOs com banco (ex.: CartaoDao) pedem a conexão para esta classe,
  *   em vez de cada um ter os seus próprios dados de conexão.
  *
  * =====================================================================
- *  CONFIGURAR APÓS A AULA DE 09/11
- *  O professor vai mostrar como quer a conexão (possivelmente com Hibernate).
- *  Até lá, NÃO configure Hibernate. Use o DaoMemoria para testar as telas.
+ *  Decisão da equipe: JDBC puro, sem Hibernate (aceito pelo professor)
  *  Não altere este arquivo sem falar com o Gabriel.
  * =====================================================================
  */
@@ -40,7 +38,6 @@ public final class ConexaoBanco {
      *         // usar a conexão aqui
      *     }
      *
-     * Pode mudar depois da aula de 09/11.
      */
     public static Connection obterConexao() throws SQLException {
         return DriverManager.getConnection(URL, USUARIO, SENHA);
