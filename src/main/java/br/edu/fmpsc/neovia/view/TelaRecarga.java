@@ -39,6 +39,7 @@ public class TelaRecarga extends JFrame {
     private final JTextField txtTitular = new JTextField(16);
     private final JTextField txtValidade = new JTextField(5);
     private final JTextField txtCvv = new JTextField(4);
+    private final JComboBox<String> cmbBandeira = new JComboBox<>(new String[]{"Visa", "Mastercard", "Elo"});
     private final JPanel painelCredito = new JPanel(new GridLayout(0, 2, 6, 6));
 
     public TelaRecarga() {
@@ -69,7 +70,8 @@ public class TelaRecarga extends JFrame {
         painelCredito.setBorder(BorderFactory.createTitledBorder("Dados do cartão de crédito"));
         painelCredito.add(new JLabel("Número:"));   painelCredito.add(txtNumCredito);
         painelCredito.add(new JLabel("Titular:"));  painelCredito.add(txtTitular);
-        painelCredito.add(new JLabel("Validade:")); painelCredito.add(txtValidade);
+        painelCredito.add(new JLabel("Bandeira:")); painelCredito.add(cmbBandeira);
+        painelCredito.add(new JLabel("Validade (MM/AAAA):")); painelCredito.add(txtValidade);
         painelCredito.add(new JLabel("CVV:"));      painelCredito.add(txtCvv);
         painelCredito.setVisible(false);
 
@@ -127,9 +129,10 @@ public class TelaRecarga extends JFrame {
             throw new IllegalArgumentException("Preencha os dados do cartão de crédito.");
         }
 
-        // AJUSTAR: passa os argumentos que o construtor do CartaoCredito do Gustavo pede.
-        // Se ele pedir menos dados, apaga os campos que sobrarem (aqui e no painelCredito).
-        return new CartaoCredito(numero, titular, validade, cvv);
+        // Construtor do CartaoCredito: (titular, bandeira, número, validade).
+        // O CVV só é conferido aqui na tela: não é guardado (só os 4 últimos dígitos vão ao banco).
+        String bandeira = (String) cmbBandeira.getSelectedItem();
+        return new CartaoCredito(titular, bandeira, numero, validade);
     }
 
     private void confirmar() {

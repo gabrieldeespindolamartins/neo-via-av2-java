@@ -1,6 +1,7 @@
 package br.edu.fmpsc.neovia.model.dao;
 
 import br.edu.fmpsc.neovia.model.CartaoTransporte;
+import br.edu.fmpsc.neovia.model.FormaPagamento;
 import br.edu.fmpsc.neovia.model.Recarga;
 import br.edu.fmpsc.neovia.model.StatusRecarga;
 import java.sql.Connection;
@@ -22,8 +23,9 @@ public class RecargaDao {
         return new IllegalStateException("Erro no banco de dados: " + e.getMessage(), e);
     }
 
-    public void inserir(Recarga r) {
-        String sql = "INSERT INTO recarga (valor, data_hora, status, cartao_id) VALUES (?, ?, ?, ?)";
+    public void inserir(Recarga r, FormaPagamento forma) {
+        String sql = "INSERT INTO recarga (valor, data_hora, status, cartao_transporte_id, forma_pagamento_id) "
+                + "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = abrir();
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -31,6 +33,7 @@ public class RecargaDao {
             ps.setTimestamp(2, Timestamp.valueOf(r.getDataHora()));
             ps.setString(3, r.getStatus().name());
             ps.setLong(4, r.getCartao().getId());
+            ps.setLong(5, forma.getId()); // a forma precisa estar salva antes (tem id)
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -44,7 +47,7 @@ public class RecargaDao {
     }
 
     public List<Recarga> listarPorCartao(CartaoTransporte cartao) {
-        String sql = "SELECT * FROM recarga WHERE cartao_id = ? ORDER BY data_hora DESC";
+        String sql = "SELECT * FROM recarga WHERE cartao_transporte_id = ? ORDER BY data_hora DESC";
         List<Recarga> lista = new ArrayList<>();
 
         try (Connection con = abrir();

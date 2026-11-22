@@ -5,6 +5,7 @@ import br.edu.fmpsc.neovia.model.FormaPagamento;
 import br.edu.fmpsc.neovia.model.Recarga;
 import br.edu.fmpsc.neovia.model.StatusRecarga;
 import br.edu.fmpsc.neovia.model.dao.CartaoDao;
+import br.edu.fmpsc.neovia.model.dao.FormaPagamentoDao;
 import br.edu.fmpsc.neovia.model.dao.RecargaDao;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 public class RecargaController {
     private final CartaoDao cartaoDao = new CartaoDao();
     private final RecargaDao recargaDao = new RecargaDao();
+    private final FormaPagamentoDao formaDao = new FormaPagamentoDao();
 
     // IllegalArgumentException = erro de validação; IllegalStateException = erro do banco
     public Recarga confirmar(CartaoTransporte cartao, String valorTexto, FormaPagamento forma) {
@@ -29,11 +31,16 @@ public class RecargaController {
             throw new IllegalArgumentException("Pagamento não aprovado.");
         }
 
+        // Ordem importante: primeiro grava a forma e a recarga; só depois credita o saldo.
+        // Assim, se o banco falhar, o saldo do cartão não muda sozinho.
+        formaDao.salvar(forma); // a recarga referencia a forma pelo id (forma_pagamento_id)
+
+        Recarga recarga = new Recarga(valor, LocalDateTime.now(), StatusRecarga.CONFIRMADA, cartao);
+        recargaDao.inserir(recarga, forma);
+
         cartao.creditar(valor);
         cartaoDao.atualizarSaldo(cartao);
 
-        Recarga recarga = new Recarga(valor, LocalDateTime.now(), StatusRecarga.CONFIRMADA, cartao);
-        recargaDao.inserir(recarga);
         return recarga;
     }
 
